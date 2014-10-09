@@ -11,7 +11,35 @@
 |
 */
 
+
+Route::get('home', function()
+{
+    $data = array();
+
+    if (Auth::check()) {
+        $data = Auth::user();
+    }
+    return View::make('home', array('data'=>$data));
+});
+
+
+//Loginrutt
 Route::get('/', function()
 {
-	return View::make('hello');
+    $data = array();
+
+    if (Auth::check()) {
+        $data = Auth::user();
+    return View::make('home', array('data'=>$data));
+    }
+    return View::make('start', array('data'=>$data));
 });
+
+
+
+
+//Autentisering
+
+Route::resource('sessions','SessionsController');
+
+Route::get('logout', 'SessionsController@destroy');

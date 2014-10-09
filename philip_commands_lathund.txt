@@ -1,0 +1,93 @@
+Lägg till...
+https://github.com/JeffreyWay/Laravel-4-Generators
+
+http://code.tutsplus.com/tutorials/pro-workflow-in-laravel-and-sublime-text--net-30695
+Laravel Pro Workflow with Sublime Text: https://www.youtube.com/watch?v=f2QH_wtURtk#t=25
+
+Gällande rutter: OBS: var oerhört noga med exakta "case" för routes, mappar m.m.
+Om exempelvis mappen är stavad med Upper-case och inte på andra ställen blir det direkt problem.
+
+***
+Språkinställningar anges i app.php i config. app/lang innehåller biblioteken. Finns tillgängliga för sverige m.fl.
+
+Blade and AngularJS syntax...-> http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs
+
+Facebook-login för Laravel -> http://maxoffsky.com/code-blog/integrating-facebook-login-into-laravel-application/
+
+*** Om problem vid login  - "Implements Userinterface etc..." Kolla så att profiles-data och users-data är ok och inte behöver rensas.
+
+Tutorial - autho essentials - https://laracasts.com/lessons/auth-essentials
+
+https://laracasts.com/
+
+===================================================================
+
+creating schema etc
+
+php artisan migrate:make create_users_table --table=users --create
+
+===================================================================
+
+-> databases, migrations -> configure table attributes. (set create)
+
+	public function up()
+	{
+		Schema::create('users', function(Blueprint $table)
+		{
+			$table->increments('id');
+			$table->string('username','20');
+			$table->string('password','150');
+			$table->string('email','40')->unique();
+			$table->string('phone','30');
+			$table->string('fname','30');
+			$table->string('lname','30');
+			$table->string('remember_token','100');
+			$table->boolean('blocked')->default(0);
+			$table->timestamps();
+		});
+	}
+
+RUN.. php artisan migrate / rollback.
+
+ALTER TABLE users ADD UNIQUE (email) //in case you need that
+
+Seeds. Populate the table with some data.
+
+
+***********************************************'
+
+Creating controllers: 
+
+php artisan controller:make SessionsController
+
+
+
+***********************************************'
+Locking down a route: (defined in app/filters.php)
+
+Route::get('profile', function()
+{
+
+	return ...
+}->before('auth');   
+
+
+
+
+
+
+
+Allmänt composer / php -problem.
+
+"The requested PHP extension fileinfo is missing from your system. "
+
+gå till php.ini och tillåt :  extension=php_fileinfo.dll
+
+Kör composer install igen.
+
+-----------
+
+
+Generera hashar till lösenord (stoppa in i databas manuellt..)
+
+echo Hash::make(Input::get('password'));
