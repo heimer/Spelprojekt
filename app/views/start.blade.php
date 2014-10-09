@@ -10,7 +10,7 @@
 
 		<div class="panel-body">
 
-		
+<!--Anvnamn kalle, lösen: kula. Mycket hemligt. -->		
 
 		{{ Form::open(array('route' => 'sessions.store', 'class'=>'form-signin form-group')) }}
  		{{ Form::text('username', $value = null, array('placeholder' => 'Användarnamn', 'class'=> 'form-control', 'required' => 'required', 'autofocus' => 'autofocus' )) }}
